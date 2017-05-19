@@ -4,80 +4,90 @@
 
 #include "ClassMap.h"
 
+enum DefLandCovType{
+    NEVER_CLS,
+    UNCLS,
+    GROUND,
+    LOW_V,
+    MED_V,
+    HIGH_V,
+    BUILD,
+    LOW_P,
+    HIGH_P,
+    WAT1
+};
+
+enum AlgLandCovType{
+    OTH,
+    WAT2,
+    GRAV,
+    SHORT_V,
+    BARE_EA,
+    YOUNG_P_F,
+    INTER_P_F,
+    MAT_P_F,
+    MAT_N_F,
+    YOUNG_N_F
+};
 
 void ClassMap::setColorDef(int def, Vec3b &tmpColor)
 {
-    /*
-     * Land cover types:
-     *
-     * 0 Never classified
-     * 1 Unclassified
-     * 2 Ground
-     * 3 Low Vegetation
-     * 4 Medium Vegetation
-     * 5 High Vegetation
-     * 6 Building
-     * 7 Low Point ("low noise")
-     * 8 High Point ("high noise")
-     * 9 Water
-     * 10+ Other
-     */
 
-    const Vec3b color0(0, 0, 0);
-    const Vec3b color1(0, 0, 0);
-    const Vec3b color2(0, 255, 255);
-    const Vec3b color3(150, 255, 200);
-    const Vec3b color4(0, 255, 0);
-    const Vec3b color5(0, 100, 0);
-    const Vec3b color6(0, 0, 255);
-    const Vec3b color7(180, 180, 180);
-    const Vec3b color8(50, 50, 50);
-    const Vec3b color9(255, 50, 50);
-    const Vec3b color10(255, 255, 255);
+    const Vec3b black(0, 0, 0);
+    const Vec3b yellow(0, 255, 255);
+    const Vec3b light_green(150, 255, 200);
+    const Vec3b med_green(0, 255, 0);
+    const Vec3b dark_green(0, 100, 0);
+    const Vec3b red(0, 0, 255);
+    const Vec3b light_gray(180, 180, 180);
+    const Vec3b dark_gray(50, 50, 50);
+    const Vec3b blue(255, 50, 50);
+    const Vec3b white(255, 255, 255);
 
-    switch (def) {
-        case 0:
-            tmpColor = color0;
+    switch ((DefLandCovType)def)
+    {
+        case NEVER_CLS:
+            tmpColor = black;
             defCls[0]++;
             break;
-        case 1:
-            tmpColor = color1;
+        case UNCLS:
+            tmpColor = black;
             defCls[1]++;
             break;
-        case 2:
-            tmpColor = color2;
+        case GROUND:
+            tmpColor = yellow;
             defCls[2]++;
             break;
-        case 3:
-            tmpColor = color3;
+        case LOW_V:
+            tmpColor = light_green;
             defCls[3]++;
             break;
-        case 4:
-            tmpColor = color4;
+        case MED_V:
+            tmpColor = med_green;
             defCls[4]++;
             break;
-        case 5:
-            tmpColor = color5;
+        case HIGH_V:
+            tmpColor = dark_green;
             defCls[5]++;
             break;
-        case 6:
-            tmpColor = color6;
+        case BUILD:
+            tmpColor = red;
             defCls[6]++;
             break;
-        case 7:
-            tmpColor = color7;
+        case LOW_P:
+            tmpColor = light_gray;
             defCls[7]++;
             break;
-        case 8:
-            tmpColor = color8;
+        case HIGH_P:
+            tmpColor = dark_gray;
             defCls[8]++;
             break;
-        case 9:
-            tmpColor = color9;
+        case WAT1:
+            tmpColor = blue;
             defCls[9]++;
             break;
         default:
-            tmpColor = color10;
+            tmpColor = white;
             defCls[10]++;
             break;
     }
@@ -85,81 +95,67 @@ void ClassMap::setColorDef(int def, Vec3b &tmpColor)
 
 void ClassMap::setColorAlg(int clas, Vec3b &tmpColor, int alg)
 {
-    /*
-    * Land cover types:
-    *
-    * 0 Other
-    * 1 Water
-    * 2 Gravel
-    * 3 ShortVeg
-    * 4 BareEarth
-    * 5 Young Planted Forest
-    * 6 Inter. Planted Forest
-    * 7 Mature Planted Forest
-    * 8 Mater Natural Forest
-    * 9 Young Natural Forest
-    */
 
-    const Vec3b color0(255, 255, 255);
-    const Vec3b color1(255, 50, 50);
-    const Vec3b color2(128, 128, 128);
-    const Vec3b color3(122, 255, 255);
-    const Vec3b color4(0, 255, 255);
-    const Vec3b color5(26, 140, 255);
-    const Vec3b color6(0, 0, 255);
-    const Vec3b color7(0, 80, 120);
-    const Vec3b color8(60, 120, 0);
-    const Vec3b color9(0, 215, 50);
+    const Vec3b white(255, 255, 255);
+    const Vec3b blue(255, 50, 50);
+    const Vec3b gray(128, 128, 128);
+    const Vec3b light_yellow(122, 255, 255);
+    const Vec3b yellow(0, 255, 255);
+    const Vec3b orange(26, 140, 255);
+    const Vec3b red(0, 0, 255);
+    const Vec3b brown(0, 80, 120);
+    const Vec3b dark_green(60, 120, 0);
+    const Vec3b light_green(0, 215, 50);
 
-    switch (clas)
+    switch ((AlgLandCovType)clas)
     {
-        case 0:
-            tmpColor = color0;
+        case OTH:
+            tmpColor = white;
             if (CLASS_ALG1 == alg) alg1Cls[0]++;
             if (CLASS_ALG2 == alg) alg2Cls[0]++;
             break;
-        case 1:
-            tmpColor = color1;
+        case WAT2:
+            tmpColor = blue;
             if (CLASS_ALG1 == alg) alg1Cls[1]++;
             if (CLASS_ALG2 == alg) alg2Cls[1]++;
             break;
-        case 2:
-            tmpColor = color2;
+        case GRAV:
+            tmpColor = gray;
             if (CLASS_ALG1 == alg) alg1Cls[2]++;
             if (CLASS_ALG2 == alg) alg2Cls[2]++;
             break;
-        case 3:
-            tmpColor = color3;
+        case SHORT_V:
+            tmpColor = light_yellow;
             if (CLASS_ALG1 == alg) alg1Cls[3]++;
             if (CLASS_ALG2 == alg) alg2Cls[3]++;
             break;
-        case 4:
-            tmpColor = color4;
+        case BARE_EA:
+            tmpColor = yellow;
             if (CLASS_ALG1 == alg) alg1Cls[4]++;
             if (CLASS_ALG2 == alg) alg2Cls[4]++;
             break;
-        case 5:
-            tmpColor = color5;
+        case YOUNG_P_F:
+            tmpColor = orange;
             if (CLASS_ALG1 == alg) alg1Cls[5]++;
             if (CLASS_ALG2 == alg) alg2Cls[5]++;
             break;
-        case 6:
-            tmpColor = color6;
+        case INTER_P_F:
+            tmpColor = red;
             if (CLASS_ALG1 == alg) alg1Cls[6]++;
             if (CLASS_ALG2 == alg) alg2Cls[6]++;
             break;
-        case 7:
-            tmpColor = color7;
+        case MAT_P_F:
+            tmpColor = brown;
             if (CLASS_ALG1 == alg) alg1Cls[7]++;
             if (CLASS_ALG2 == alg) alg2Cls[7]++;
             break;
-        case 8:
-            tmpColor = color8;
+        case MAT_N_F:
+            tmpColor = dark_green;
             if (CLASS_ALG1 == alg) alg1Cls[8]++;
             if (CLASS_ALG2 == alg) alg2Cls[8]++;
             break;
-        case 9:
-            tmpColor = color9;
+        case YOUNG_N_F:
+            tmpColor = light_green;
             if (CLASS_ALG1 == alg) alg1Cls[9]++;
             if (CLASS_ALG2 == alg) alg2Cls[9]++;
             break;
@@ -284,8 +280,8 @@ void ClassMap::show(int clNum) {
 
         if(scale > 1)
         {
-           newCol *= scale;
-           newRow *= scale;
+            newCol *= scale;
+            newRow *= scale;
         }
         Size size((int)newCol, (int)newRow);
         resize(img, img2, size);
@@ -295,7 +291,7 @@ void ClassMap::show(int clNum) {
     }
     else
     {
-        cerr << "Eroor : Unable show maps!" << endl;
+        cerr << "Error : Unable show maps!" << endl;
     }
 }
 
@@ -308,4 +304,3 @@ ClassMap ClassMap::operator=(const ClassMap &map) {
     this->fileName = map.fileName;
     return *this;
 }
-
