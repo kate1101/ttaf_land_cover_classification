@@ -1,8 +1,6 @@
 # ttaf_land_cover_classification
 -----------------------------------------------------------------------------------------------
-Corresponding source file:
-
-Any LAS/LAZ file with LiDAR pointcloud
+Corresponding source file: Any LAS/LAZ file with LiDAR pointcloud
 -----------------------------------------------------------------------------------------------
 Main program: LidarClassProcess.cpp
 
@@ -23,7 +21,7 @@ Output files:
 lidar_models.txt -->In every row (X;Y) coordinates and the 8 surface models result.
 					At the endof the lines the classification result of original LiDAR classification.
 					
-lidar_classes.txt -->In 2. row: maximum (X,Y) coordinate values .
+lidar_classes.txt -->In 2. row: maximum (X;Y) coordinate values .
 					 After then in every row (X;Y) coordinates, classification result of original LiDAR classification, 1. Algorithm and 2. Algorithm.
 
 statData.txt --> Statistics about classification result.
@@ -33,3 +31,18 @@ statData.txt --> Statistics about classification result.
 alg 0.png --> Color coded image about classification result of original LiDAR classification
 alg 0.png --> Color coded image about classification result of the 1. implemented algorithm
 alg 0.png --> Color coded image about classification result of the 2. implemented algorithm
+-----------------------------------------------------------------------------------------------
+Sample results: 
+3 areas from public AHN3 pointcloud database (https://www.pdok.nl/nl/ahn3-downloads)
+
+delf: 
+Delftse Hout - Lake near Delft town surrounded by forest
+http://gis.inf.elte.hu/files/public/ahn-samples/dl/ahn3_delftse_hout.laz [4km2, 367MB, 70 391 851 points, running: 5 min]
+
+berg: 
+Bergse Bos - Park in Rotterdam, there are forest areas mostly at the west 
+http://gis.inf.elte.hu/files/public/ahn-samples/dl/ahn3_bergse_bos.laz [~8km2, 722MB, 142 914 525 points, running: 10 min]
+
+meij: 
+Meijendel - Beach north from Haga, National Park, there are forest areas away from the sea
+http://gis.inf.elte.hu/files/public/ahn-samples/dl/ahn3_meijendel.laz  [27km2, 3811MB, 739 245 272 points, running: ~1h]
